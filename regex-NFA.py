@@ -91,6 +91,9 @@ def addConcat(regEx):
     return "".join(res)
 
 def parseRegEx(regEx, postfix):
+    # Eliminar espacios en blanco de la expresión regular
+    regEx = regEx.replace(" ", "")
+
     if regEx == "":
         return VALID_REGEX
 
@@ -117,6 +120,7 @@ def parseRegEx(regEx, postfix):
         postfix.append(stack.pop())
     return VALID_REGEX
 
+
 def readJSON(path):
     with open(path, "r") as f:
         data = json.load(f)
@@ -142,23 +146,34 @@ def visualize_nfa(nfa_json, output_path):
     dot.render(output_path, format='png', cleanup=True)
 
 def kleene_base_cases(symbol):
-    if symbol == '':
+    if symbol == '$':
         nfa = NFA()
         start_state = State()
         nfa.addState(start_state)
         nfa.makeStart(start_state)
         nfa.makeAccept(start_state)
         return nfa
+    elif symbol == 'p':
+        nfa = NFA()
+        start_state = State()
+        nfa.addState(start_state)
+        nfa.makeStart(start_state)
+        return nfa
     else:
         nfa = NFA()
         q0 = State()
-        q1 = State()
         nfa.addState(q0)
-        nfa.addState(q1)
         nfa.makeStart(q0)
+        q1 = State()
+        nfa.addState(q1)
         nfa.makeAccept(q1)
         nfa.addTransition(q0, q1, symbol)
         return nfa
+
+
+
+
+
 
 def kleene_union(nfa1, nfa2):
     nfa = NFA()
