@@ -153,7 +153,7 @@ def kleene_base_cases(symbol):
         nfa.makeStart(start_state)
         nfa.makeAccept(start_state)
         return nfa
-    elif symbol == 'p':
+    elif symbol == '':
         nfa = NFA()
         start_state = State()
         nfa.addState(start_state)
