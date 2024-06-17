@@ -1,0 +1,15 @@
+digraph {
+	q0
+	q1
+	q3
+	q2
+	q4 [shape=doublecircle]
+	q0 -> q1 [label="ε"]
+	q0 -> q2 [label="ε"]
+	q1 -> q3 [label=a]
+	q3 -> q1 [label="ε"]
+	q3 -> q0 [label="ε"]
+	q2 -> q4 [label=b]
+	start [shape=point]
+	start -> q0
+}
