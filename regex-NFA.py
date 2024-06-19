@@ -91,8 +91,8 @@ def addConcat(regEx):
     return "".join(res)
 
 def parseRegEx(regEx, postfix):
-    # Eliminar espacios en blanco de la expresión regular
-    regEx = regEx.replace(" ", "")
+    # No eliminar espacios en blanco de la expresión regular aquí
+    # regEx = regEx.replace(" ", "")
 
     if regEx == "":
         return VALID_REGEX
@@ -119,7 +119,6 @@ def parseRegEx(regEx, postfix):
     while stack:
         postfix.append(stack.pop())
     return VALID_REGEX
-
 
 def readJSON(path):
     with open(path, "r") as f:
@@ -153,7 +152,7 @@ def kleene_base_cases(symbol):
         nfa.makeStart(start_state)
         nfa.makeAccept(start_state)
         return nfa
-    elif symbol == '':
+    if symbol == '' or symbol == ' ':
         nfa = NFA()
         start_state = State()
         nfa.addState(start_state)
@@ -169,11 +168,6 @@ def kleene_base_cases(symbol):
         nfa.makeAccept(q1)
         nfa.addTransition(q0, q1, symbol)
         return nfa
-
-
-
-
-
 
 def kleene_union(nfa1, nfa2):
     nfa = NFA()
@@ -219,7 +213,6 @@ def thompson(regEx):
         start_state = State()
         nfa.addState(start_state)
         nfa.makeStart(start_state)
-        nfa.makeAccept(start_state)
         return nfa
 
     stackNFA = []
