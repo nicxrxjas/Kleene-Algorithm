@@ -152,7 +152,7 @@ def kleene_base_cases(symbol):
         nfa.makeStart(start_state)
         nfa.makeAccept(start_state)
         return nfa
-    if symbol == '' or symbol == ' ':
+    if symbol == '' or symbol == ' ' or symbol == None:
         nfa = NFA()
         start_state = State()
         nfa.addState(start_state)
