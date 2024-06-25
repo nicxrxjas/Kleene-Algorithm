@@ -94,7 +94,7 @@ def parseRegEx(regEx, postfix):
     # No eliminar espacios en blanco de la expresión regular aquí
     # regEx = regEx.replace(" ", "")
 
-    if regEx == "":
+    if regEx == "" or regEx == " ":
         return VALID_REGEX
 
     for a in regEx:
@@ -127,6 +127,7 @@ def readJSON(path):
 
 def visualize_nfa(nfa_json, output_path):
     dot = Digraph()
+    dot.attr(rankdir='LR')  # Añade esta línea para cambiar la orientación del gráfico
     for state in nfa_json["states"]:
         if state in nfa_json["final_states"]:
             dot.node(state, shape='doublecircle')
@@ -143,6 +144,7 @@ def visualize_nfa(nfa_json, output_path):
         dot.node("start", shape="point")
         dot.edge("start", start_state)
     dot.render(output_path, format='png', cleanup=True)
+
 
 def kleene_base_cases(symbol):
     if symbol == '$':
